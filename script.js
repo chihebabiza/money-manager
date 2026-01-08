@@ -27,6 +27,14 @@ const updateWalletBtn = document.getElementById('update-wallet-btn');
 const editAccountModal = document.getElementById('edit-account-modal');
 const editAccountNameInput = document.getElementById('edit-account-name');
 const updateAccountBtn = document.getElementById('update-account-btn');
+const editTransactionModal = document.getElementById('edit-transaction-modal');
+const editTransactionForm = document.getElementById('edit-transaction-form');
+const editWalletSelect = document.getElementById('edit-wallet');
+const editAmountInput = document.getElementById('edit-amount');
+const editTypeInput = document.getElementById('edit-type');
+const editDateInput = document.getElementById('edit-date');
+const editNoteInput = document.getElementById('edit-note');
+const updateTransactionBtn = document.getElementById('update-transaction-btn');
 const closeBtns = document.querySelectorAll('.close-btn');
 
 
@@ -37,6 +45,7 @@ let transactions = [];
 let selectedAccountId = null;
 let editingWalletId = null;
 let editingAccountId = null;
+let editingTransactionId = null;
 
 // Load data from local storage
 function loadData() {
@@ -235,6 +244,34 @@ function removeTransaction(id) {
     initApp();
 }
 
+function openEditTransactionModal(id) {
+    editingTransactionId = id;
+    const transaction = transactions.find(t => t.id === id);
+    const accountWallets = wallets.filter(w => w.accountId === selectedAccountId);
+
+    editWalletSelect.innerHTML = '';
+    accountWallets.forEach(wallet => {
+        const option = document.createElement('option');
+        option.value = wallet.id;
+        option.textContent = wallet.name;
+        if (wallet.id === transaction.walletId) {
+            option.selected = true;
+        }
+        editWalletSelect.appendChild(option);
+    });
+
+    editAmountInput.value = Math.abs(transaction.amount);
+    editTypeInput.value = transaction.type;
+    editDateInput.value = transaction.date;
+    editNoteInput.value = transaction.note;
+
+    editTransactionModal.style.display = 'block';
+}
+
+function closeEditTransactionModal() {
+    editTransactionModal.style.display = 'none';
+}
+
 
 // --- UI and Calculation ---
 
@@ -274,7 +311,10 @@ function displayTransactions() {
             <span>${wallet ? wallet.name : 'N/A'}</span>
             <span>${transaction.date}</span>
             <span>${sign}${Math.abs(transaction.amount)}</span>
-            <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
+            <div>
+                <button class="edit-btn" onclick="openEditTransactionModal(${transaction.id})">Edit</button>
+                <button class="delete-btn" onclick="removeTransaction(${transaction.id})">x</button>
+            </div>
         `;
         transactionListEl.appendChild(item);
     });
@@ -335,15 +375,18 @@ addWalletBtn.addEventListener('click', addWallet);
 form.addEventListener('submit', addTransaction);
 updateWalletBtn.addEventListener('click', updateWallet);
 updateAccountBtn.addEventListener('click', updateAccount);
+updateTransactionBtn.addEventListener('click', updateTransaction);
 
 closeBtns.forEach(btn => btn.addEventListener('click', () => {
     editWalletModal.style.display = 'none';
     editAccountModal.style.display = 'none';
+    editTransactionModal.style.display = 'none';
 }));
 
 window.addEventListener('click', (e) => {
-    if (e.target == editWalletModal || e.target == editAccountModal) {
+    if (e.target == editWalletModal || e.target == editAccountModal || e.target == editTransactionModal) {
         editWalletModal.style.display = 'none';
         editAccountModal.style.display = 'none';
+        editTransactionModal.style.display = 'none';
     }
 });

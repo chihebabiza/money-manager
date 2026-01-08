@@ -99,6 +99,41 @@
         </div>
     </div>
 
+    <div id="edit-transaction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Edit Transaction</h3>
+            <form id="edit-transaction-form">
+                <div class="form-control">
+                    <label for="edit-wallet">Wallet</label>
+                    <select id="edit-wallet" required>
+                        <!-- Wallet options will be added here by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="edit-amount">Amount</label>
+                    <input type="number" id="edit-amount" placeholder="Enter amount..." required>
+                </div>
+                <div class="form-control">
+                    <label for="edit-type">Type</label>
+                    <select id="edit-type" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="edit-date">Date</label>
+                    <input type="date" id="edit-date" required>
+                </div>
+                <div class="form-control">
+                    <label for="edit-note">Note (Optional)</label>
+                    <input type="text" id="edit-note" placeholder="Enter a note...">
+                </div>
+                <button id="update-transaction-btn" class="btn">Update Transaction</button>
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 
