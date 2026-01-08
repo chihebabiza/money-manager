@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="account-selection-screen">
+        <h1>Select an Account</h1>
+        <div id="accounts-list"></div>
+        <div class="add-account-form">
+            <input type="text" id="account-name" placeholder="New account name...">
+            <button id="add-account-btn" class="btn">Create Account</button>
+        </div>
+    </div>
+
+    <div class="container" style="display: none;">
+        <div class="account-header">
+            <h1 id="current-account-name"></h1>
+            <button id="switch-account-btn">Switch Account</button>
+        </div>
+
+        <div class="balance">
+            <h2>Your Balance</h2>
+            <span id="balance" class="total-balance">0.00 DZD</span>
+        </div>
+
+        <div class="summary">
+            <div class="income">
+                <h3>Income</h3>
+                <span id="total-income" class="income-amount">0.00 DZD</span>
+            </div>
+            <div class="expense">
+                <h3>Expenses</h3>
+                <span id="total-expenses" class="expense-amount">0.00 DZD</span>
+            </div>
+        </div>
+
+
+        <div class="wallets">
+            <h3>Wallets</h3>
+            <ul id="wallet-list">
+                <!-- Wallets will be added here by JavaScript -->
+            </ul>
+            <div class="add-wallet-form">
+                <input type="text" id="wallet-name" placeholder="New wallet name...">
+                <button id="add-wallet-btn" class="btn">Add Wallet</button>
+            </div>
+        </div>
+
+        <div class="transaction-form">
+            <h3>Add New Transaction</h3>
+            <form id="transaction-form">
+                <div class="form-control">
+                    <label for="wallet">Wallet</label>
+                    <select id="wallet" required>
+                        <!-- Wallet options will be added here by JavaScript -->
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" placeholder="Enter amount..." required>
+                </div>
+                <div class="form-control">
+                    <label for="type">Type</label>
+                    <select id="type" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-control">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-control">
+                    <label for="note">Note (Optional)</label>
+                    <input type="text" id="note" placeholder="Enter a note...">
+                </div>
+                <button class="btn">Add Transaction</button>
+            </form>
+        </div>
+
+        <div class="transaction-list">
+            <h3>Transaction History</h3>
+            <ul id="transactions">
+                <!-- Transactions will be added here by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <div id="edit-wallet-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Edit Wallet</h3>
+            <input type="text" id="edit-wallet-name" placeholder="New wallet name...">
+            <button id="update-wallet-btn" class="btn">Update Wallet</button>
+        </div>
+    </div>
+
+    <div id="edit-account-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Edit Account</h3>
+            <input type="text" id="edit-account-name" placeholder="New account name...">
+            <button id="update-account-btn" class="btn">Update Account</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
