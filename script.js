@@ -1,7 +1,5 @@
 // DOM elements
 const balanceEl = document.getElementById('balance');
-const totalIncomeEl = document.getElementById('total-income');
-const totalExpensesEl = document.getElementById('total-expenses');
 const transactionListEl = document.getElementById('transactions');
 const form = document.getElementById('transaction-form');
 const amountInput = document.getElementById('amount');
@@ -298,12 +296,8 @@ function calculateBalances() {
     });
 
     const totalBalance = accountWallets.reduce((acc, wallet) => acc + wallet.balance, 0);
-    const income = accountTransactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0);
-    const expense = accountTransactions.filter(t => t.type === 'expense').reduce((acc, t) => acc + t.amount, 0) * -1;
 
     balanceEl.innerText = `${totalBalance.toFixed(2)} DZD`;
-    totalIncomeEl.innerText = `${income.toFixed(2)} DZD`;
-    totalExpensesEl.innerText = `${expense.toFixed(2)} DZD`;
 }
 
 
